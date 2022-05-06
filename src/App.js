@@ -16,7 +16,7 @@ const Table = ({list, onDismiss}) =>
                 <span>{item.address} </span>
                 <span>{item.postal_code} </span>
                 <span>{item.city} </span>
-                <Button onClick={() => onDismiss(item.first_name)}>
+                <Button onClick={() => onDismiss(item.phone)}>
                     Dismiss
                 </Button>
             </div>)}
@@ -27,7 +27,7 @@ const Table = ({list, onDismiss}) =>
 function Button(props) {
     const {
         onClick,
-        className = '', // Settes som default '' fordi optional
+        className = '', //  default '' because optional
         children
     } = props
     return (
@@ -45,7 +45,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: null,// før: result: null,
+            result: null,
             searchTerm: `${PATH_BASE}${PATH_USERS}`,
         }
 
@@ -61,14 +61,18 @@ class App extends Component {
     }
 
     onDismiss(phone) {
-        console.log("onDismiss: this.state.result")
-        console.log(this.state.result)
-        const isNotID = item => item.phone !== phone;
+        console.log("onDismiss: phone: ", phone)
+        console.log("onDismiss state", this.state)
 
+        const isNotID = item => item.phone !== phone;
         const updatedHits = this.state.result.filter(isNotID);
+
         this.setState({
             result: {...this.state.result, hits: updatedHits} // Spread operator
         })
+
+        console.log("onDismiss: this.state.result etter filter", this.state.result)
+
     }
 
     componentDidMount() {
@@ -79,18 +83,19 @@ class App extends Component {
     }
 
     render() {
+        console.log("render: state", this.state)
+        console.log("render: state.result", this.state.result)
+        console.log("render: type of state.result", typeof this.state.result)
         const {result} = this.state
 
         if (!result) {
             return null;
         }
-        console.log("result from render")
-        console.log(this.state.result)
         return (
             <div className="App">
                 <h2>Brukere</h2>
                 <Table
-                    // children props passed down from above
+                    // children props, passed down from above
                     list={result}
                     onDismiss={this.onDismiss}
                 />
