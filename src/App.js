@@ -52,28 +52,20 @@ class App extends Component {
         // bindings
         this.setUsers = this.setUsers.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
-        // console.log("Fra constructor: state.result: " + this.state.result)
-        // console.log("Fra constructor: this.props: " + this.props)
     }
 
     setUsers(result) {
-        console.log("setUsers kjører")
         this.setState({result});
-        console.log("result fra setUsers" + result) // object
-        // console.log("state fra setUsers" + this.state)
+        console.log("result fra setUsers")
+        console.log(result) // object
     }
 
     onDismiss(phone) {
-        // console.log("Fra onDismiss(): phone: " + phone)
+        console.log("onDismiss: this.state.result")
         console.log(this.state.result)
-        // console.log("Fra onDismiss(): item.phone: " + item.phone)
-        // console.log("Fra onDismiss(): result:" + this.state.result)
         const isNotID = item => item.phone !== phone;
-        // console.log("Fra onDismiss(): item : " + this.state.result.filter(isNotID()))
 
         const updatedHits = this.state.result.filter(isNotID);
-        // console.log("updatedHits " + updatedHits)
-        // const updatedHits = this.state.result.filter(isNotID())
         this.setState({
             result: {...this.state.result, hits: updatedHits} // Spread operator
         })
@@ -88,13 +80,12 @@ class App extends Component {
 
     render() {
         const {result} = this.state
-        // console.log("Fra render(): this.onDismiss: " + this.onDismiss) // result og mer snacks
-        // console.log("render(): result: " + result)
 
         if (!result) {
             return null;
         }
-        console.log("result fra render:" + this.state.result)
+        console.log("result from render")
+        console.log(this.state.result)
         return (
             <div className="App">
                 <h2>Brukere</h2>
