@@ -7,28 +7,28 @@ import './App.css';
 const PATH_BASE = "http://localhost:3000";
 const PATH_USERS = "/users";
 
-function Button(props) {
-    const {
-        onClick,
-        className = '', //  default '' because optional
-        children
-    } = props
-    return (
-        <button
-            onClick={onClick}
-            className={className}
-            type="button"
-        >
-            {children}
-        </button>
-    );
-}
+// function Button(props) {
+//     const {
+//         onClick,
+//         className = '', //  default '' because optional
+//         children
+//     } = props
+//     return (
+//         <button
+//             onClick={onClick}
+//             className={className}
+//             type="button"
+//         >
+//             {children}
+//         </button>
+//     );
+// }
 
 
 function App() {
     const [users, setUsers] = useState([])
 
-    const data = React.useMemo(() => users)
+    const data = React.useMemo(() => users,[users])
     const columns = React.useMemo(
         () => [
             {
