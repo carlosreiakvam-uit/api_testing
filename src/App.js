@@ -79,7 +79,7 @@ function App() {
 
     return (
         <Container className="p-3">
-            <h2> Brukere < /h2>
+            <h2> Elever </h2>
             <table {...getTableProps()}>
                 <thead>
                 {// Loop over the header rows
