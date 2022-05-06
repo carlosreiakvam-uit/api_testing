@@ -1,0 +1,12 @@
+run locally using json-server
+
+install:
+npm install -g json-server
+
+start:
+1: cd into this folder
+2: json-server --watch output.json
+
+If using powershell:
+    Fix for not digitally signed message:
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
