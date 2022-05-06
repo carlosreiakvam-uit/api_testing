@@ -45,7 +45,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: null,
+            result: [],
             searchTerm: `${PATH_BASE}${PATH_USERS}`,
         }
 
@@ -56,19 +56,19 @@ class App extends Component {
 
     setUsers(result) {
         this.setState({result});
-        console.log("result fra setUsers")
-        console.log(result) // object
+        console.log("setUsers: result", result)
     }
 
     onDismiss(phone) {
         console.log("onDismiss: phone: ", phone)
         console.log("onDismiss state", this.state)
 
-        const isNotID = item => item.phone !== phone;
-        const updatedHits = this.state.result.filter(isNotID);
+        const isNotPhone = item => item.phone !== phone;
+        const updatedHits = this.state.result.filter(isNotPhone);
 
         this.setState({
-            result: {...this.state.result, hits: updatedHits} // Spread operator
+            // result: [...this.state.result, hits: updatedHits] // Spread operator
+            result: updatedHits // Spread operator
         })
 
         console.log("onDismiss: this.state.result etter filter", this.state.result)
