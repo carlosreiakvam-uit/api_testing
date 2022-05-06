@@ -45,7 +45,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: [],// før: result: null,
+            result: null,// før: result: null,
             searchTerm: `${PATH_BASE}${PATH_USERS}`,
         }
 
@@ -64,18 +64,19 @@ class App extends Component {
     }
 
     onDismiss(phone) {
-        console.log("Fra onDismiss(): phone: " + phone)
+        // console.log("Fra onDismiss(): phone: " + phone)
+        console.log(this.state.result)
         // console.log("Fra onDismiss(): item.phone: " + item.phone)
         // console.log("Fra onDismiss(): result:" + this.state.result)
         const isNotID = item => item.phone !== phone;
         // console.log("Fra onDismiss(): item : " + this.state.result.filter(isNotID()))
 
-        const updatedHits = this.state.result.user.filter(isNotID());
+        const updatedHits = this.state.result.filter(isNotID);
         // console.log("updatedHits " + updatedHits)
         // const updatedHits = this.state.result.filter(isNotID())
-        // this.setState({
-        //     result: {...this.state.result, hits: updatedHits} // Spread operator
-        // })
+        this.setState({
+            result: {...this.state.result, hits: updatedHits} // Spread operator
+        })
     }
 
     componentDidMount() {
