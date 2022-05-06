@@ -11,14 +11,10 @@ const Table = ({list, onDismiss}) =>
     <div>
         {list.map(item =>
             <div key={item.phone}>
-                <thhead>Fornavn</thhead>
-                <tr><span>{item.first_name} </span></tr>
-                <th>Etternavn</th>
-                <tr><span>{item.last_name} </span></tr>
-                <th>Tlf</th>
-                <th>Adresse</th>
-                <th>Postnummer</th>
-                <th>By</th>
+                <span>{item.first_name} </span>
+                <span>{item.last_name} </span>
+                <span>Tlf</span>
+                <span>By</span>
                 <span>{item.phone} </span>
                 <span>{item.address} </span>
                 <span>{item.postal_code} </span>
