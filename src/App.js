@@ -3,27 +3,11 @@ import React, {useEffect, useState} from "react";
 import {useTable} from 'react-table'
 import Container from 'react-bootstrap/Container';
 import './App.css';
-import {useSortBy} from "react-table/src";
+import {useSortBy} from "react-table";
 
 const PATH_BASE = "http://localhost:3000";
 const PATH_USERS = "/users";
 
-// function Button(props) {
-//     const {
-//         onClick,
-//         className = '', //  default '' because optional
-//         children
-//     } = props
-//     return (
-//         <button
-//             onClick={onClick}
-//             className={className}
-//             type="button"
-//         >
-//             {children}
-//         </button>
-//     );
-// }
 function Table({columns, data}) {
     const {
         getTableProps,
@@ -75,11 +59,12 @@ function Table({columns, data}) {
                                     )
                                 })}
                             </tr>
-                        )}
+                        )
+                    }
                 )}
                 </tbody>
             </table>
-            <br />
+            <br/>
             <div>Showing the first 20 results of {rows.length} rows</div>
         </>
     )
