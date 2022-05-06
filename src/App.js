@@ -1,5 +1,6 @@
 import './App.css';
-import {Component} from "react";
+import  {Component, useState} from "react";
+import {useTable} from 'react-table'
 
 const PATH_BASE = "http://localhost:3000";
 const PATH_USERS = "/users";
@@ -10,12 +11,17 @@ const Table = ({list, onDismiss}) =>
     <div>
         {list.map(item =>
             <div key={item.phone}>
-                <span>{item.first_name} </span>
-                <span>{item.last_name} </span>
+                <thhead>Fornavn</thhead>
+                <tr><span>{item.first_name} </span></tr>
+                <th>Etternavn</th>
+                <tr><span>{item.last_name} </span></tr>
+                <th>Tlf</th>
+                <th>Adresse</th>
+                <th>Postnummer</th>
+                <th>By</th>
                 <span>{item.phone} </span>
                 <span>{item.address} </span>
                 <span>{item.postal_code} </span>
-                <span>{item.city} </span>
                 <Button onClick={() => onDismiss(item.phone)}>
                     Dismiss
                 </Button>
@@ -41,6 +47,21 @@ function Button(props) {
     );
 }
 
+// function ReactTable({columns, data}) {
+//     const columns = React.useMemo(() => [
+//             {
+//                 Header: 'Column 1',
+//                 accessor: 'col1'
+//             },
+//             {
+//                 Header: 'Column 2',
+//                 accessor: 'col2'
+//             },
+//         ],
+//         [])
+//
+// }
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -52,6 +73,8 @@ class App extends Component {
         // bindings
         this.setUsers = this.setUsers.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
+
+
     }
 
     setUsers(result) {
@@ -72,6 +95,9 @@ class App extends Component {
         })
 
         console.log("onDismiss: this.state.result etter filter", this.state.result)
+    }
+
+    onSort(item) {
 
     }
 
