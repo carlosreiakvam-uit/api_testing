@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useTable} from 'react-table'
 import Container from 'react-bootstrap/Container';
 import './App.css';
+import {useSortBy} from "react-table/src";
 
 const PATH_BASE = "http://localhost:3000";
 const PATH_USERS = "/users";
@@ -23,12 +24,72 @@ const PATH_USERS = "/users";
 //         </button>
 //     );
 // }
+function Table({columns, data}) {
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = useTable({
+            columns,
+            data,
+        },
+        useSortBy
+    )
+    const firstPageRows = rows.slice(0, 20)
+
+    return (
+        <>
+            <table {...getTableProps()}>
+                <thead>
+                {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                            // Add the sorting props to control sorting. For this example
+                            // we can add them into the header props
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                {column.render('Header')}
+                                {/* Add a sort direction indicator */}
+                                <span>
+                    {column.isSorted
+                        ? column.isSortedDesc
+                            ? ' 🔽'
+                            : ' 🔼'
+                        : ''}
+                  </span>
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                {firstPageRows.map(
+                    (row, i) => {
+                        prepareRow(row);
+                        return (
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                    return (
+                                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                    )
+                                })}
+                            </tr>
+                        )}
+                )}
+                </tbody>
+            </table>
+            <br />
+            <div>Showing the first 20 results of {rows.length} rows</div>
+        </>
+    )
+}
 
 
 function App() {
     const [users, setUsers] = useState([])
 
-    const data = React.useMemo(() => users,[users])
+    const data = React.useMemo(() => users, [users])
     const columns = React.useMemo(
         () => [
             {
@@ -58,18 +119,9 @@ function App() {
         ],
         []
     )
-    const tableInstance = useTable({columns, data})
+    // const tableInstance = useTable({columns, data})
 
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = tableInstance
-
-    console.log(users)
     useEffect(() => {
         fetch(`${PATH_BASE}${PATH_USERS}`)
             .then(response => response.json())
@@ -80,47 +132,7 @@ function App() {
     return (
         <Container className="p-3">
             <h2> Elever </h2>
-            <table {...getTableProps()}>
-                <thead>
-                {// Loop over the header rows
-                    headerGroups.map(headerGroup => (
-                        // Apply the header row props
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {// Loop over the headers in each row
-                                headerGroup.headers.map(column => (
-                                    // Apply the header cell props
-                                    <th {...column.getHeaderProps()}>
-                                        {// Render the header
-                                            column.render('Header')}
-                                    </th>
-                                ))}
-                        </tr>
-                    ))}
-                </thead>
-                {/* Apply the table body props */}
-                <tbody {...getTableBodyProps()}>
-                {// Loop over the table rows
-                    rows.map(row => {
-                        // Prepare the row for display
-                        prepareRow(row)
-                        return (
-                            // Apply the row props
-                            <tr {...row.getRowProps()}>
-                                {// Loop over the rows cells
-                                    row.cells.map(cell => {
-                                        // Apply the cell props
-                                        return (
-                                            <td {...cell.getCellProps()}>
-                                                {// Render the cell contents
-                                                    cell.render('Cell')}
-                                            </td>
-                                        )
-                                    })}
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <Table columns={columns} data={data}/>
         </Container>
     )
 }
