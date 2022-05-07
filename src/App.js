@@ -21,9 +21,9 @@ function Table({columns, data}) {
         },
         useSortBy
     )
-    const firstPageRows = rows.slice(0, 20)
 
     return (
+        // Med utgangspunkt i eksempel fra https://react-table.tanstack.com/docs/examples/sorting
         <>
             <table {...getTableProps()}>
                 <thead>
@@ -48,7 +48,7 @@ function Table({columns, data}) {
                 ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                {firstPageRows.map(
+                {rows.map(
                     (row, i) => {
                         prepareRow(row);
                         return (
@@ -65,7 +65,6 @@ function Table({columns, data}) {
                 </tbody>
             </table>
             <br/>
-            <div>Showing the first 20 results of {rows.length} rows</div>
         </>
     )
 }
@@ -104,9 +103,9 @@ function App() {
         ],
         []
     )
-    // const tableInstance = useTable({columns, data})
 
 
+    // Fetch data from API
     useEffect(() => {
         fetch(`${PATH_BASE}${PATH_USERS}`)
             .then(response => response.json())
