@@ -1,9 +1,8 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
-import {useTable} from 'react-table'
 import Container from 'react-bootstrap/Container';
-import './App.css';
-import {useSortBy} from "react-table";
+import {useTable, useSortBy} from 'react-table'
+import {useForm} from 'react-hook-form'
 
 const PATH_BASE = "http://localhost:3000";
 const PATH_USERS = "/users";
@@ -69,9 +68,15 @@ function Table({columns, data}) {
     )
 }
 
+function updateTable(data) {
+
+}
+
 
 function App() {
     const [users, setUsers] = useState([])
+    const {register, handleSubmit} = useForm();
+    const onSubmit = data => updateTable(data)
 
     const data = React.useMemo(() => users, [users])
     const columns = React.useMemo(
@@ -104,6 +109,21 @@ function App() {
         []
     )
 
+    // PUT data to API
+    // useEffect(() => {
+    //     async function updatePost() {
+    //         const requestOptions = {
+    //             method: 'PUT',
+    //             headers: {'Content-Type': 'application/json'},
+    //             body: JSON.stringify({first_name: "ape"})
+    //         };
+    //         const response = await fetch(`${PATH_BASE}${PATH_USERS}`);
+    //         const data = await response.json();
+    //         setUsers(data.first_name);
+    //     }
+    //
+    //     updatePost();
+    // }, []);
 
     // Fetch data from API
     useEffect(() => {
@@ -116,27 +136,25 @@ function App() {
     return (
         <Container className="p-3">
             <h2> Elever </h2>
+
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input {...register("first_name", {required: 'Felt må fylles ut'})} placeholder="Fornavn"/>
+                    <input {...register("last_name", {required: true})} placeholder="Etternavn"/>
+                    <input {...register("phone", {required: true})} placeholder="Tlf"/>
+                    <input {...register("address", {required: true})} placeholder="Addresse"/>
+                    <input {...register("postal_code",
+                        {required: true, minLength: {value: 4, message: '4 '}})}
+                           placeholder="Postnummer"/>
+                    <input {...register("city", {required: true})} placeholder="By"/>
+                    <input type="submit" name="Legg til"/>
+                </form>
+            </div>
+
             <Table columns={columns} data={data}/>
         </Container>
     )
 }
-
-
-// function onDismiss(phone)
-// {
-//     console.log("onDismiss: phone: ", phone)
-//     console.log("onDismiss state", this.state)
-//
-//     const isNotPhone = item => item.phone !== phone;
-//     const updatedHits = this.state.result.filter(isNotPhone);
-//
-//     this.setState({
-//         // result: [...this.state.result, hits: updatedHits] // Spread operator
-//         result: updatedHits // Spread operator
-//     })
-//
-//     console.log("onDismiss: this.state.result etter filter", this.state.result)
-// }
 
 
 export default App;
