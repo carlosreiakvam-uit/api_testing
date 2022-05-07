@@ -37,3 +37,5 @@ Følgende mangler foreløpig:
 9. I terminal: kjør ```npm install``` for å installere alle dependencies.
 10. I terminal: kjør ```npm start``` for å starte appen. Den kan deretter vises i en nettleser ved å følge linken som kommer opp. 
 
+*Ved spørsmål kontakt Carlos på carlosreiakvam@outlook.com*
+
