@@ -73,21 +73,31 @@ function App() {
     const [users, setUsers] = useState([])
     const {register, handleSubmit} = useForm();
     const onSubmit = data => {
-        console.log(data);
-
         // // POST data to API
         const requestOptions = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify(data)
         };
-        console.log(requestOptions);
         fetch(`${PATH_BASE}${PATH_USERS}`, requestOptions)
             .then(response => response.json())
-            .then(data => setUsers(data));
+            .then(setUsers(data.data))
+        // setUsers({data})
+        // .then(result => setUsers(JSON.parse(result)))
+        // .then(data => setUsers(JSON.parse(data)))
+        // .catch(error => error);
+
+        // // console.log("hallo?")
+        // fetch(`${PATH_BASE}${PATH_USERS}`)
+        //     .then(response => response.json())
+        //     .then(result => setUsers(result))
+        //     .catch(error => error);
     }
 
-    const data = React.useMemo(() => users, [users])
+    // const data = React.useMemo(() => users, [users])
     const columns = React.useMemo(
         () => [
             {
@@ -129,7 +139,8 @@ function App() {
 
     return (
         <Container className="p-3">
-            <h2> Elever </h2>
+
+            <h3> Elever </h3>
 
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,10 +156,9 @@ function App() {
                 </form>
             </div>
 
-            <Table columns={columns} data={data}/>
+            <Table columns={columns} data={users}/>
         </Container>
     )
 }
-
 
 export default App;
