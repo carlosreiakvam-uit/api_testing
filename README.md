@@ -22,7 +22,7 @@ Følgende mangler foreløpig:
 
 1. Clone dette prosjektet fra Github. Fra en terminal kan det gjøres med med ```git clone https://github.com/carlosreiakvam-uit/api_testing.git```
 
-2. Om node ikke er installert på maskinen fra før; last ned og installer: Download | Node.js (nodejs.org).
+2. Om Node ikke er installert på maskinen fra før; last ned og installer [Node](https://nodejs.org/en/download/)
 
 3. Åpne terminal og skriv ```npm -v``` for å bekrefte installasjon av Node.
 
