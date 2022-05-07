@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# LUMI Gruppen Oppgave Internship
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Av Carlos Reiakvam
 
-## Available Scripts
+### Om funksjonalitet i appen
 
-In the project directory, you can run:
+Følgende funksjoner er implementert:
 
-### `npm start`
+- Kjøring av mock-server med gitt json-fil ved hjelp av json-server.
+- Asynkron fetching av data fra API (json-server) og visning av dette i tabell.
+- Sortering ved trykking på headers i tabellen.
+- Form med mulighet for å legge inn nye elever ved hjelp av POST request. 
+ (Nettsiden må foreløpig refreshes manuelt for å vise endring).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Følgende mangler foreløpig:
+- Tømming av tabell
+- Sletting av enkelt element
+- Popup ved klikking på elev
+- Eventuelt bilde ved hver elev
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installasjonsveiledning
 
-### `npm test`
+1. Clone dette prosjektet fra Github. Fra en terminal kan det gjøres med med ```git clone https://github.com/carlosreiakvam-uit/api_testing.git```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Om node ikke er installert på maskinen fra før; last ned og installer: Download | Node.js (nodejs.org).
 
-### `npm run build`
+3. Åpne terminal og skriv ```npm -v``` for å bekrefte installasjon av Node.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. I terminal: cd inn i clonet prosjekt.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. I terminal: Installer json-server med ```npm install -g json-server```.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. I terminal: cd videre inn i mappen src -> json_serverfile. Der ligger filen output.json (som er noe modifisert for å kunne fungere med json-server).
 
-### `npm run eject`
+7. I terminal: kjør ```json-server –watch output.json``` for å kjøre igang en lokal mock-server med data fra output.json.
+8. I terminal: cd tilbake til root folder for clonet prosjekt.
+9. I terminal: kjør ```npm install``` for å installere alle dependencies.
+10. I terminal: kjør ```npm start``` for å starte appen. Den kan deretter vises i en nettleser ved å følge linken som kommer opp. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
