@@ -68,15 +68,24 @@ function Table({columns, data}) {
     )
 }
 
-function updateTable(data) {
-
-}
-
 
 function App() {
     const [users, setUsers] = useState([])
     const {register, handleSubmit} = useForm();
-    const onSubmit = data => updateTable(data)
+    const onSubmit = data => {
+        console.log(data);
+
+        // // POST data to API
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        };
+        console.log(requestOptions);
+        fetch(`${PATH_BASE}${PATH_USERS}`, requestOptions)
+            .then(response => response.json())
+            .then(data => setUsers(data));
+    }
 
     const data = React.useMemo(() => users, [users])
     const columns = React.useMemo(
@@ -109,21 +118,6 @@ function App() {
         []
     )
 
-    // PUT data to API
-    // useEffect(() => {
-    //     async function updatePost() {
-    //         const requestOptions = {
-    //             method: 'PUT',
-    //             headers: {'Content-Type': 'application/json'},
-    //             body: JSON.stringify({first_name: "ape"})
-    //         };
-    //         const response = await fetch(`${PATH_BASE}${PATH_USERS}`);
-    //         const data = await response.json();
-    //         setUsers(data.first_name);
-    //     }
-    //
-    //     updatePost();
-    // }, []);
 
     // Fetch data from API
     useEffect(() => {
