@@ -71,14 +71,15 @@ function Table({columns, data}) {
 
 function App() {
     const [users, setUsers] = useState([])
+    const [update, setUpdate] = useState()
     const {register, handleSubmit} = useForm();
+
+    // POST ny elev
     const onSubmit = data => {
-        data.id = (users.length + 1) // Legg til id, json-server trenger denne
+        data.id = (users.length + 1); // Legg til id, json-server trenger denne
         const axios = require('axios');
         axios.post('http://localhost:3000/users', data)
             .then(resp => console.log(resp.data))
-
-
     }
 
     // const data = React.useMemo(() => users, [users])
