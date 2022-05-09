@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
 import Container from 'react-bootstrap/Container';
-import {useTable, useSortBy} from 'react-table'
+import {useSortBy, useTable} from 'react-table'
 import {useForm} from 'react-hook-form'
 
 const PATH_BASE = "http://localhost:3000";
@@ -73,28 +73,12 @@ function App() {
     const [users, setUsers] = useState([])
     const {register, handleSubmit} = useForm();
     const onSubmit = data => {
-        // // POST data to API
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
-        fetch(`${PATH_BASE}${PATH_USERS}`, requestOptions)
-            .then(response => response.json())
-            .then(setUsers(data.data))
-        // setUsers({data})
-        // .then(result => setUsers(JSON.parse(result)))
-        // .then(data => setUsers(JSON.parse(data)))
-        // .catch(error => error);
+        data.id = (users.length + 1) // Legg til id, json-server trenger denne
+        const axios = require('axios');
+        axios.post('http://localhost:3000/users', data)
+            .then(resp => console.log(resp.data))
 
-        // // console.log("hallo?")
-        // fetch(`${PATH_BASE}${PATH_USERS}`)
-        //     .then(response => response.json())
-        //     .then(result => setUsers(result))
-        //     .catch(error => error);
+
     }
 
     // const data = React.useMemo(() => users, [users])
