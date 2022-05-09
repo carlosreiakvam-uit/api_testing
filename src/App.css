@@ -5,9 +5,16 @@ form {
     margin-bottom: 20px;
     /*margin: 0 auto;*/
 }
-td,th{
-    padding:8px;
+
+td, th {
+    padding: 8px;
 }
+
+input {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
 body {
     display: flex;
     flex-direction: column;
